@@ -14,32 +14,62 @@ const ExpenseForm = () => {
     const titleHandler = (event) => {
         // setEnteredTitle(event.target.value);
         // console.log(enteredTitle);
-        setEnteredValues({
-            ...enteredValues,
-            enteredTitle: event.target.value
-        });
+
+        //    this method is not safe we cant be sure about enteredValues(previouseState) state
+        //so use callback from react which gives the previouse state 
+        //use this when current state need previouse state
+        // setEnteredValues({
+        //     ...enteredValues,
+        //     enteredTitle: event.target.value
+        // });
+        setEnteredValues(
+            (previouseState) => {
+                return {
+                    ...previouseState,
+                    enteredTitle: event.target.value
+                };
+            });
         console.log(enteredValues.enteredTitle);
     };
     const amountHandler = (event) => {
         // setEnteredAmount(event.target.value);
         // console.log(enteredAmount);
-        setEnteredValues({
-            ...enteredValues,
-            enteredAmount: event.target.value
-        });
+        // setEnteredValues({
+        //     ...enteredValues,
+        //     enteredAmount: event.target.value
+        // });
+        // console.log(enteredValues.enteredAmount);
+        setEnteredValues(
+            (previouseState) => {
+                return {
+                    ...previouseState,
+                    enteredAmount: event.target.value
+                };
+            });
         console.log(enteredValues.enteredAmount);
     };
     const dateHandler = (event) => {
         // setEnteredDate(event.target.value);
         // console.log(enteredDate);
-        setEnteredValues({
-            ...enteredValues,
-            enteredAmount: event.target.value
-        });
-        console.log(enteredValues.enteredAmount);
+        // setEnteredValues({
+        //     ...enteredValues,
+        //     enteredDate: event.target.value
+        // });
+        setEnteredValues(
+            (previouseState) => {
+                return {
+                    ...previouseState,
+                    enteredDate: event.target.value
+                };
+            });
+        console.log(enteredValues.enteredDate);
     };
 
-    return <form>
+    const formSubmitHandler = (event) => {
+        event.preventDefault();
+        console.log(enteredValues);
+    }
+    return <form onSubmit={formSubmitHandler }>
         <div className="new-expense__controls">
             {enteredValues.enteredTitle}
             <div className="new-expense__control">
